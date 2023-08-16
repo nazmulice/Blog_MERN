@@ -7,14 +7,17 @@ const blogSchema = mongoose.Schema(
     },
     content: {
       type: String,
-      require: true,
+      required: true,
     },
     img: {
       type: String,
+      required: true,
+      default:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmiqR_gB1aE6SmGpJvgdi6j6MZYtLpcSittA&usqp=CAU",
     },
     author: {
       type: String,
-      require: true,
+      required: true,
     },
     role: {
       type: Number,

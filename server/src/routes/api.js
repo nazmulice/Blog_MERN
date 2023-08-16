@@ -13,7 +13,7 @@ const {
 
 router.post("/create", createBlog);
 router.post("/getAll", getAllBlog);
-router.post("/getOne/:id", blogById);
+router.get("/getOne/:id", blogById);
 router.post("/update/:id", updateBlog);
 router.delete("/delete/:id", deleteBlog);
 
