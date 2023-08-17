@@ -11,17 +11,14 @@ const {
   login,
   updateProfile,
   logout,
+  allUser,
 } = require("../controller/authController");
 
 router.post("/register", register);
 router.post("/login", login);
 router.post("/logout", requireSignIn, logout); 
-
-router.get("/auth-check", requireSignIn, (req, res) => {
-  res.json({ ok: true });
-});
 router.put("/profile", requireSignIn, updateProfile);
-
+router.get("/user", allUser);
 
 
 module.exports = router;

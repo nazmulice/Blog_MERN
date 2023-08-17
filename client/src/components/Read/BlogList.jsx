@@ -10,6 +10,7 @@ import Loader from "../common/Loader";
 const BlogList = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     fetchData();
@@ -83,12 +84,37 @@ const BlogList = () => {
     );
   }
 
+  const filteredData = data.filter((item) => {
+    const regex = new RegExp(searchQuery, "i"); 
+    return regex.test(item.title) || regex.test(item.content);
+  });
+
   return (
     <div className="container mt-4">
-      <h1 className="mb-4 p-2 bg-body-secondary">Latest Blog</h1>
+      <input
+        type="text"
+        placeholder="Search blog posts..."
+        onChange={(e) => setSearchQuery(e.target.value)}
+        className="form-control mb-4"
+      />
+
+      {searchQuery && (
+        <p className="mb-4 p-2 bg-body-secondary">
+          {filteredData.length === 0
+            ? "No matching results"
+            : `Showing ${filteredData.length} ${
+                filteredData.length === 1 ? "result" : "results"
+              } for "${searchQuery}"`}
+        </p>
+      )}
+
+      {/* {filteredData.length > 0 && (
+        <h1 className="mb-4 p-2 bg-body-secondary">Latest Blog</h1>
+      )} */}
+
       <div className="row">
-        {data.length > 0 ? (
-          data.map((item) => (
+        {filteredData.length > 0 ? (
+          filteredData.map((item) => (
             <div className="col-md-4 mb-4" key={item._id}>
               <div className="card">
                 <img
@@ -106,7 +132,7 @@ const BlogList = () => {
                   </p>
 
                   <Link
-                    to={"/getOne/" +  item["_id"]}
+                    to={"/getOne/" + item["_id"]}
                     className="btn btn-outline-primary btn-sm m-1"
                   >
                     Read More
@@ -130,7 +156,9 @@ const BlogList = () => {
             </div>
           ))
         ) : (
-          <p className="text-muted">No data available</p>
+          <h4 className="text-danger">
+            {searchQuery ? "No matching results" : "Enter a search query"}
+          </h4>
         )}
       </div>
     </div>

@@ -71,10 +71,10 @@ exports.login = async (req, res) => {
     
     res.json({
       user: {
+        _id: user._id,
         name: user.name,
         email: user.email,
         role: user.role,
-      
       },
       token,
     });
@@ -87,7 +87,7 @@ exports.login = async (req, res) => {
 exports.logout = async (req, res) => {
   try {
     await res.clearCookie("token");
-    res.json({ message: "Logged out successfully" });
+    res.status(200).json({ message: "Logged out successfully" });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "An error occurred" });
@@ -130,4 +130,16 @@ exports.updateProfile = async (req, res) => {
     console.log(err);
   }
 };
+
+exports.allUser = async (req, res) => {
+  try {
+    const user = await User.find().sort({ createdAt: -1 });
+    if (user) {
+      res.status(202).json({ message: "Success all User", user });
+    }
+  } catch (err) {
+    res.status(404).json({ error: "Failed to get all task" });
+  }
+};
+
 

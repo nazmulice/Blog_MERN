@@ -17,7 +17,7 @@ const Footer = () => {
                 <span className="pe-2">
                   <i className="fa-solid fa-copyright"></i>
                 </span>
-                <b>TechTalk</b> Copyright || All Rights Reserved
+                <b>Nazmul</b> Copyright @2023 || All Rights Reserved
               </p>
             </div>
           </div>

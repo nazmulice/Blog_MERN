@@ -27,7 +27,7 @@ class Validation {
       text: msg,
       className: "info",
       offset: {
-        x: 100,
+        x: 50,
         y: 65,
       },
       style: {
@@ -43,7 +43,7 @@ class Validation {
       className: "info",
       offset: {
         x: 50,
-        y: 60,
+        y: 40,
       },
       position: "center",
       style: {
