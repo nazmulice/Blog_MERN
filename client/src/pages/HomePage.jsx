@@ -11,7 +11,7 @@ import SinglePage from "./SinglePage";
 import Update from "./Update";
 import "./style.css";
 const Homepage = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <div>
       <BrowserRouter>

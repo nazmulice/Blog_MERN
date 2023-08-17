@@ -25,6 +25,7 @@ const LoginUser = () => {
       } else {
         localStorage.setItem("authorization", data.token);
         localStorage.setItem("role", data.user.role);
+        sessionStorage.setItem("user", data.user["_id"]);
 
         if (data.user.role === "admin") {
           toast.success("Admin Login");

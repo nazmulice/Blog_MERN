@@ -60,8 +60,8 @@ const CreateUpdateForm = () => {
   };
 
   return (
-    <div className="container card mt-2">
-      <h3 className="text-center text-success fw-bold card-title pt-1">
+    <div className="container card mt-2 shadow border rounded mb-3 py-2 p-md-4">
+      <h3 className="text-center text-success fw-bold card-title">
         {id ? "UPDATE BLOG" : "CREATE NEW BLOG"}
       </h3>
       <hr />

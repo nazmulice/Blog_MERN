@@ -12,6 +12,8 @@ function AppNevBar({ isLoggedIn }) {
     fontWeight: "bold",
   };
 
+  
+
   return (
     <Navbar expand="lg" bg="primary" variant="dark">
       <Container>

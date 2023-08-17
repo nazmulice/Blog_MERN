@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { errorToast } from "../helper/Validation";
+//import { errorToast } from "../helper/Validation";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -12,31 +12,48 @@ const RegisterPage = () => {
     email: "",
     password: "",
   });
+    
+    const validateEmail = (email) => {
+      // Basic email validation regex pattern
+      const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+      return emailPattern.test(email);
+    };
+
+    const validatePassword = (password) => {
+      // Password must be at least 8 characters
+      return password.length >= 6;
+    };
+    
+
   const changeHandler = (property, value) => {
     setFormData({ ...formData, [property]: value });
   };
 
-  const onSubmit = () => {
-    const isEmptyField = Object.values(formData).some((value) => value === "");
-    if (isEmptyField) {
-      errorToast("Please fill all fields");
-    } else {
-      try {
-        let URL = "http://localhost:8000/api/v1/register";
-        axios.post(URL, formData).then((res) => {
-          if (res.status === 200) {
-            toast.success("User Registration Successfully");
-          }
-          if (!res.status === 200) {
-            toast.error("An error occurred");
-          }
-          navigate("/login"); //redirect to login
-        });
-      } catch (error) {
-        toast.error("An error occurred");
-      }
-    }
-  };
+   const onSubmit = () => {
+     const { name, email, password } = formData;
+
+     if (!name || !email || !password) {
+       toast.error("Please fill all fields");
+     } else if (!validateEmail(email)) {
+       toast.error("Invalid email format");
+     } else if (!validatePassword(password)) {
+       toast.error("Password must be 6 character");
+     } else {
+       try {
+         const URL = "http://localhost:8000/api/v1/register";
+         axios.post(URL, formData).then((res) => {
+           if (res.status === 200) {
+             toast.success("Registration Successful");
+             navigate("/login");
+           } else {
+             toast.error("An error occurred");
+           }
+         });
+       } catch (error) {
+         toast.error("An error occurred");
+       }
+     }
+   };
 
   return (
     <div className="container  shadow border rounded mt-3 py-2 p-md-5">
