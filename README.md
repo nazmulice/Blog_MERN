@@ -1,1 +1,2 @@
-# Blog_MERN
+Blog project 
+Live link: techblog-ostad.netlify.app/
